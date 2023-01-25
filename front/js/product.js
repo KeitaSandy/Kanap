@@ -27,12 +27,15 @@ function displayProduct(productChoice) {
   document.getElementById("price").innerText = productChoice.price;
   // description du produit
   document.getElementById("description").innerText = productChoice.description;
-  // ajout des couleurs
-    let color = document.getElementById("colors");
-      for (i = 0; i < productChoice.colors.length; i++) {
-        color.innerHTML += `<option value="${productChoice.colors[i]}">${productChoice.colors[i]}</option>`;}
-// ajout du produit au panier
-
+  // ajout des couleurs via une boucle
+productChoice.colors.forEach(function (color) {
+  const prodOption = document.createElement("option");
+  prodOption.value = color;
+  prodOption.innerText = color;
+  const prodSelect = document.getElementById("colors");
+  prodSelect.appendChild(prodOption)
+});
+// ajout des produits dans le panier
 
  
 }
