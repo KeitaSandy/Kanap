@@ -4,16 +4,16 @@ console.log(idProduct);
 
 // Si on a bien récupéré un id on récupère les données de l'API correspondant à cet id
 if (idProduct !== null) 
-try {
+
   fetch("http://localhost:3000/api/products/" + idProduct)
     .then((response) => response.json())
     .then((data) => {
       displayProduct(data);
-    });
-    }
-    catch(error) {
+    })
+    .catch((error) => {
         console.error("Erreur");
-    }
+    });
+    
   
     
 
@@ -68,7 +68,7 @@ function displayProduct(productChoice) {
 
   // vérifier que la soit quantité renseignée avant d'ajouter au panier 
   // sinon un msg d'alerte s'affiche
-     if (quantity == 0 || quantity > 100 ) {
+     if (quantity < 1 || quantity < 100 ) {
       alert("Merci de préciser une quantité entre 1 et 100 svp!");
     } else{
 
@@ -98,9 +98,10 @@ function displayProduct(productChoice) {
       if (productFind !== false) {
         lSBasket[productFind].quantity =
           parseInt(lSBasket[productFind].quantity) + finalProduct.quantity;
-      } else {
+      } 
+      else {
         lSBasket.push(finalProduct);
-      }
+      } 
       localStorage.setItem("basket", JSON.stringify(lSBasket));
   // msg pour confirmer l'ajout au panier
      alert("produit ajouté au panier!")
@@ -108,5 +109,6 @@ function displayProduct(productChoice) {
     } 
   });
 
-  
+
+
 }
